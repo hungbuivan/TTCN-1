@@ -1,0 +1,44 @@
+form{
+
+    border: 1px solid gray;
+
+}
+
+label{
+
+    margin-left: 400px;
+
+}
+
+.input_image{
+
+    margin-left: 19px;
+    width: 400px;
+
+}
+.input_name{
+
+    margin-left: 20px;
+    width: 400px;
+
+}
+
+.input_price{
+
+    margin-left: 27px;
+    width: 400px;
+
+}
+
+.input_title{
+
+    margin-left: 28px;
+    width: 400px;
+
+}
+
+.btnEdit{
+
+    margin-left: 400px;
+
+}

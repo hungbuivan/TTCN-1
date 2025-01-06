@@ -1,0 +1,36 @@
+/*Css by image file*/
+
+.article{
+
+    border: 1px solid black;
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 1300px;
+
+}
+
+td{
+
+    border: 1px solid gray;
+
+}
+
+th{
+
+    border: 1px solid gray;
+
+}
+
+
+.img_upload{
+
+     width: 600px;
+
+}
+
+.img_upload_file{
+
+    margin-left: 230px;
+
+}
+
