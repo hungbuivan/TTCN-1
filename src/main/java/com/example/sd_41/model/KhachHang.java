@@ -69,8 +69,5 @@ public class KhachHang {
 
     @Column(name = "trangThai")
     private int trangThai;
-    
-    @Column(name = "status")
-    private int status;
 
 }

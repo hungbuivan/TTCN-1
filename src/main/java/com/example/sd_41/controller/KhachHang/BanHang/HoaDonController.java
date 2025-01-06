@@ -63,7 +63,6 @@ public class HoaDonController {
     private HoaDonServiceImpl hoaDonServiceImpl;
 
     @Autowired
-//    @Qualifier("giayTheThaoChiTietRepository")
     private GiayTheThaoChiTietRepository giayTheThaoChiTietRepository;
 
     @Autowired

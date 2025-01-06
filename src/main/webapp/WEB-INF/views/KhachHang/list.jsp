@@ -112,7 +112,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="kh" items="${listPage}" varStatus="i">
+        <c:forEach var="kh" items="${listPage}">
             <tr class="product-item hide-row" data-tenKhachHang="${kh.tenKhachHang}" data-email="${kh.email}"
                 data-soDienThoai="${kh.soDienThoai}" data-diaChi="${kh.diaChi}">
                 <th style="">${i.index+1}</th>
@@ -123,7 +123,7 @@
                 <td style="">${kh.ngaySinh}</td>
                 <td style="">${kh.soDienThoai}</td>
                 <td style="">${kh.diaChi}</td>
-                <td style="">${kh.ghiChu} <span>${kh.status}</span></td>
+                <td style="">${kh.ghiChu}</td>
                 <td style="padding-top: 30px">${kh.trangThai==0 ?"✔" : "✖"}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/KhachHang/edit/${kh.id}">
