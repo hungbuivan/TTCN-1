@@ -177,21 +177,19 @@
                                 <label style="color: red;margin-left: 40px">${diaChiHopLe}</label>
 
                             </div>
-                            <div class="col-6">
-                                <label for="province" style="margin-left: 40px; margin-top: 20px">Thành phố/Tỉnh<span
-                                        style="color: red; margin-left: 5px">*</span>
-                                </label>
-                                <select style="width: 250px;margin-left: 30px" id="province" name="quocGia" class="form-control"
-                                        onchange="loadDistricts(); checkSelection()">
-                                    <option value="">${thanhPho}</option>
-                                </select>
-                                <input type="hidden" id="tinh1" name="quocGia1">
-                                <div class="er">
-                                    <label style="color: red;margin-left: 40px">${quocGia1}</label>
-                                    <label style="color: red;margin-left: 40px">${erCheckThanhPhoNull}</label>
-
-                                </div>
-                            </div>
+							<div class="col-6">
+								<label for="province" style="margin-left: 40px; margin-top: 20px">
+								    Thành phố/Tỉnh<span style="color: red; margin-left: 5px">*</span>
+								</label>
+								<select id="province" name="quocGia" class="form-control" style="width: 250px; margin-left: 30px" onchange="loadDistricts();">
+								    <option value="">Chọn tỉnh</option>
+									<input type="hidden" id="tinh1" name="quocGia1">
+								</select>
+							        <div class="er">
+							            <label style="color: red; margin-left: 40px">${quocGia1}</label>
+							            <label style="color: red; margin-left: 40px">${erCheckThanhPhoNull}</label>
+							        </div>
+							    </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -319,24 +317,40 @@
     var quocGiaValue = '${thanhPho}';
 
 	async function loadProvinces() {
-	     const response = await fetch(`http://localhost:8080/public/provinces`);
-	     const data = await response.json();
+	    try {
+	        const response = await fetch("http://localhost:8080/public/provinces");
+	        const data = await response.json();
 
-	     console.log(data);  // Kiểm tra dữ liệu từ API
+	        console.log("Danh sách tỉnh từ API:", data); // Kiểm tra dữ liệu API trả về
 
-	     const provinceSelect = document.getElementById("province");
-	     if (quocGiaValue === null || quocGiaValue === "") {
-	         provinceSelect.innerHTML = '<option value="">Chọn tỉnh</option>';
-	     }
+	        const provinceSelect = document.getElementById("province");
 
-	     for (const province of data.data) {
-	         const option = document.createElement("option");
-	         option.value = province.ProvinceID;
-	         option.text = province.ProvinceName;
-	         provinceSelect.appendChild(option);
-	         console.log(province.ProvinceID, province.ProvinceName);
-	     }
-	 }
+	        // Reset dropdown
+	        provinceSelect.innerHTML = '<option value="">Chọn tỉnh</option>';
+
+	        if (data && data.data && Array.isArray(data.data)) {
+	            for (const province of data.data) {
+	                const option = document.createElement("option");
+	                option.value = province.ProvinceID;
+	                option.textContent = province.ProvinceName;
+	                provinceSelect.appendChild(option);
+	            }
+	        } else {
+	            console.error("Dữ liệu không hợp lệ hoặc không có tỉnh:", data);
+	        }
+	    } catch (error) {
+	        console.error("Lỗi khi tải danh sách tỉnh:", error);
+	    }
+	}
+	
+	document.getElementById("province").addEventListener("change", function () {
+	    const selectedValue = this.value; // Lấy giá trị của option được chọn
+	    document.getElementById("tinh1").value = selectedValue; // Gán giá trị cho input hidden
+	});
+
+
+	// Gọi hàm khi DOM tải xong
+	document.addEventListener("DOMContentLoaded", loadProvinces);
 
 
     async function loadDistricts() {
