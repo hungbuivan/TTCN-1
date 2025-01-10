@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Danh sách dữ liệu giầy thể thao</title>
+    <title>Danh sách dữ liệu giày thể thao</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="/css/ChuongTrinhGiamGia/HoaDon/list.css" rel="stylesheet">
@@ -159,7 +159,7 @@
                     <form id="filter-form">
                         <div class="row">
                             <div class="col-6">
-                                <h6 style="color:black">Tên giầy thể thao</h6>
+                                <h6 style="color:black">Tên giày thể thao</h6>
                                 <input style="width: 500px; height: 35px;border-radius: 5px 5px 5px" type="text" id="tenGiayTheThao" placeholder="Tên giầy thể thao">
                             </div>
                             <div class="col-6">
@@ -172,7 +172,7 @@
                                 <br>
                                 <div>
                                     <p style="float: left;margin-right: 75px;color: black">Giá tối thiểu: <span id="minPrice">100.000</span></p>
-                                    <p style="color: black">Giá tối đa: <span id="maxPrice">300.000</span></p>
+                                    <p style="color: black">Giá tối đa: <span id="maxPrice">5000000</span></p>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                         <thead>
                         <tr>
                             <th style="padding-top: 5px; text-align: center; color: black">STT</th>
-                            <th style="padding-top: 5px; text-align: center; color: black">Tên giầy thể thao</th>
+                            <th style="padding-top: 5px; text-align: center; color: black">Tên giày thể thao</th>
                             <th style="padding-top: 5px; text-align: center; color: black;width: 180px">Giá bán VNĐ
                                 <a href="${pageContext.request.contextPath}/GiayTheThao/listGiayTheThao?sort=desc">
                                     <i class="fa fa-caret-down" style="font-size: 1.5em;"></i>
@@ -234,7 +234,7 @@
                                 </a>
                             </th>
                             <th style="padding-top: 5px; text-align: center; color: black">Thương hiệu</th>
-							<th style="padding-top: 5px; text-align: center; color: black">Image</th>
+							<th style="padding-top: 5px; text-align: center; color: black">Ảnh</th>
                             <th style="padding-top: 5px; text-align: center; color: black">Trạng thái</th>
                             <th style="padding-top: 5px; text-align: center; color: black">Chức năng</th>
                         </tr>
@@ -259,7 +259,7 @@
 								</td>
                                 <td style="padding-top: 3px; text-align: center; color: black">${giayTheThao.trangThai == 1 ? "✔" : "✖"}</td>
                                 <td>
-                                    <a class="col-sm-4" href="${pageContext.request.contextPath}/GiayTheThao/update/${giayTheThao.id}"><button class="btn btn-primary" style="margin-top: 3px" >Detail</button></a>
+                                    <a class="col-sm-4" href="${pageContext.request.contextPath}/GiayTheThao/update/${giayTheThao.id}"><button class="btn btn-primary" style="margin-top: 3px" >Chi tiết</button></a>
                                 </td>
                             </tr>
                         </c:forEach>

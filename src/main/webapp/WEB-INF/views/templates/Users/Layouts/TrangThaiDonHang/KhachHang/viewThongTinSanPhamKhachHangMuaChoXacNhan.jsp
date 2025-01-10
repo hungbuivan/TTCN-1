@@ -79,10 +79,10 @@
 
             </td>
             <td style="font-size: 17px;color: black">
-                <fmt:formatNumber type="" value="${hoaDonView.thanhTien}" pattern="#,##0.###" />
+                <fmt:formatNumber type="" value="${hoaDonView.thanhTien + 30000}" pattern="#,##0.###" />
             </td>
             <td style="font-size: 17px;color: black">
-                <fmt:formatNumber type="" value="${hoaDonView.phiShip}" pattern="#,##0.###" />
+                <fmt:formatNumber type="" value="30000" pattern="#,##0.###" />
             </td>
             <td style="font-size: 17px;color: black">
                 ${hoaDonView.ghiChu}

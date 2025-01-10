@@ -19,6 +19,8 @@
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.6/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 
     <style>
 
@@ -179,10 +181,10 @@
 
                 </td>
                 <td style="font-size: 14px;color: black;font-weight: bold">
-                    <fmt:formatNumber type="" value="${tongTienView}" pattern="#,##0.###" /> VNĐ
+                    <fmt:formatNumber type="" value="${tongTienView + 30000}" pattern="#,##0.###" /> VNĐ
                 </td>
                 <td style="font-size: 14px;color: black;font-weight: bold">
-                    <fmt:formatNumber type="" value="${phiShipView}" pattern="#,##0.###" /> VNĐ
+                    <fmt:formatNumber type="" value="30000" pattern="#,##0.###" /> VNĐ
                 </td>
                 <td style="font-size: 14px;color: black;font-weight: bold">${thongTienNhanHangView}</td>
                 <td style="font-size: 14px;color: black;font-weight: bold">
@@ -312,6 +314,21 @@
     var addButton = document.getElementById("addButton");
     var addFormContainer = document.getElementById("addFormContainer");
 
+    var hoaDonChiTiets = [];
+    <c:forEach items="${hoaDonChiTiets}" var="list" varStatus="i">
+        <c:if test="${list.hoaDon.trangThai eq 1}">
+            hoaDonChiTiets.push({
+                stt: "${i.index + 1}",
+                tenGiay: "${list.giayTheThaoChiTiet.giayTheThao.tenGiayTheThao}",
+                size: "${list.giayTheThaoChiTiet.size.size}",
+                mauSac: "${list.giayTheThaoChiTiet.mauSac.tenMauSac}",
+                soLuong: "${list.soLuong}",
+                giaBan: "${list.giayTheThaoChiTiet.giayTheThao.giaBan}",
+                hinhAnh: "/upload/${list.giayTheThaoChiTiet.giayTheThao.image.get(0).link}"
+            });
+        </c:if>
+    </c:forEach>
+    
     // Add an event listener to the button
     addButton.addEventListener("click", function () {
         // Toggle the visibility of the form container
@@ -341,105 +358,76 @@
         }
     }
 	
-	
     function exportInvoiceToExcel() {
-        // Get the invoice data
-        var maHoaDon = "${maHoaDonView}";
-        var khachHang = "${khachHangView}";
-        var ngayThanhToan = "${formattedDate}";
-        var tongTien = "${tongTienView}";
-        var phiShip = "${phiShipView}";
-        var thongTinNhanHang = "${thongTienNhanHangView}";
-        var ghiChu = "${messView != null ? messView : 'N/A'}";
-		var diaChiShop = "123 Đường ABC, Quận 1, TP.HCM";
+        try {
+            // Dữ liệu hóa đơn cơ bản
+            var maHoaDon = "${maHoaDonView}";
+            var khachHang = "${khachHangView}";
+            var ngayThanhToan = "${formattedDate}";
+            var tongTien = "${tongTienView + 30000}";
+            var phiShip = "30000";
+            var thongTinNhanHang = "${thongTinNhanHangView}";
+            var ghiChu = "${messView != null ? messView : 'N/A'}";
+            var diaChiShop = "123 Đường ABC, Quận 1, TP.HCM";
 
-        // Prepare the data for Excel
-        var invoiceData = [
-            ["HÓA ĐƠN BÁN HÀNG"],
-            ["Mã hóa đơn", maHoaDon],
-            ["Khách hàng", khachHang],
-            ["Ngày thanh toán", ngayThanhToan],
-            ["Tổng tiền", tongTien + " VNĐ"],
-            ["Phí ship", phiShip + " VNĐ"],
-            ["Thông tin nhận hàng", thongTinNhanHang],
-            ["Ghi chú", ghiChu],
-			["Địa chỉ shop", diaChiShop], // Thêm địa chỉ shop
-            [],
-            ["CHI TIẾT SẢN PHẨM"]
-        ];
+            // Chuẩn bị dữ liệu Excel
+            var invoiceData = [
+                ["HÓA ĐƠN BÁN HÀNG"],
+                ["Mã hóa đơn", maHoaDon],
+                ["Khách hàng", khachHang],
+                ["Ngày thanh toán", ngayThanhToan],
+                ["Tổng tiền", tongTien + " VNĐ"],
+                ["Phí ship", phiShip + " VNĐ"],
+                ["Thông tin nhận hàng", thongTinNhanHang],
+                ["Ghi chú", ghiChu],
+                ["Địa chỉ shop", diaChiShop],
+                [],
+                ["CHI TIẾT SẢN PHẨM"],
+                ["STT", "Tên giày", "Size", "Màu sắc", "Số lượng", "Giá bán"]
+            ];
 
-		var productItems = document.querySelectorAll('.giayTheThaoChiTiet');
-		    invoiceData.push(["STT", "Tên giày", "Size", "Màu sắc", "Số lượng", "Giá bán"]);
+            // Thêm chi tiết sản phẩm vào Excel
+            hoaDonChiTiets.forEach(function (item) {
+                invoiceData.push([
+                    item.stt,
+                    item.tenGiay,
+                    item.size,
+                    item.mauSac,
+                    item.soLuong,
+                    item.giaBan + " VNĐ"
+                ]);
+            });
 
-		    productItems.forEach(function(item, index) {
-		        var tenGiay = item.querySelector('.giayTheThao') ? item.querySelector('.giayTheThao').textContent.trim() : '';
-		        var size = item.querySelector('.size') ? item.querySelector('.size').textContent.trim() : '';
-		        var mauSac = item.querySelector('.mauSac') ? item.querySelector('.mauSac').textContent.trim() : '';
-		        var soLuong = item.querySelector('.soLuong') ? item.querySelector('.soLuong').textContent.trim() : '';
-		        var giaBan = item.querySelector('.giaBan') ? item.querySelector('.giaBan').textContent.trim() : '';
+            // Tạo file Excel
+            var ws = XLSX.utils.aoa_to_sheet(invoiceData);
+            ws["!cols"] = [
+                { wch: 5 },  // STT
+                { wch: 30 }, // Tên giày
+                { wch: 10 }, // Size
+                { wch: 15 }, // Màu sắc
+                { wch: 10 }, // Số lượng
+                { wch: 15 }  // Giá bán
+            ];
 
-		        // Only add valid products
-		        if (tenGiay && size && mauSac && soLuong && giaBan) {
-		            invoiceData.push([
-		                index + 1,
-		                tenGiay,
-		                size,
-		                mauSac,
-		                soLuong,
-		                giaBan + " VNĐ"
-		            ]);
-		        }
-		    });
+         // Convert array to worksheet
+    		ws["!cols"] = [
+    		        { wch: 30 },  // Column A width (for long text like "Mã hóa đơn")
+    		        { wch: 30 },  // Column B width (for values like maHoaDon, khachHang, etc.)
+    		    ];
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Hóa Đơn");
+            XLSX.writeFile(wb, maHoaDon + "_hoadon.xlsx");
 
-        // Create a worksheet and workbook
-        var ws = XLSX.utils.aoa_to_sheet(invoiceData); // Convert array to worksheet
-		ws["!cols"] = [
-		        { wch: 20 },  // Column A width (for long text like "Mã hóa đơn")
-		        { wch: 30 },  // Column B width (for values like maHoaDon, khachHang, etc.)
-		    ];
-		
-        var wb = XLSX.utils.book_new(); // Create a new workbook
-        XLSX.utils.book_append_sheet(wb, ws, "Hóa Đơn"); // Add worksheet to workbook
-
-        // Export Excel file
-        XLSX.writeFile(wb, maHoaDon + "_hoadon.xlsx"); // Save file
+            alert("Xuất hóa đơn thành công!");
+        } catch (error) {
+            console.error("Lỗi khi xuất hóa đơn:", error.message);
+        }
     }
-
-
 
 
 
 </script>
 
-<%--JS cho phần thông báo nạp tiền--%>
-
-<%--<script>--%>
-<%--    var themThanhCong = "${themThanhCong}";--%>
-<%--    if (themThanhCong == "2") {--%>
-<%--        Swal.fire({--%>
-<%--            position: 'top-end', // Vị trí của thông báo--%>
-<%--            toast: true, // Thiết lập kiểu thông báo là "toast"--%>
-<%--            showConfirmButton: false, // Không hiển thị nút xác nhận--%>
-<%--            timer: 3000, // Thời gian hiển thị (đơn vị là milliseconds)--%>
-<%--            width: '300px', // Đặt chiều rộng của thông báo--%>
-<%--            text: 'Đơn hàng được hủy thành công!',--%>
-<%--            icon: 'success',--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    var themThatBai = "${themThatBai}";--%>
-<%--    if (themThatBai == "2") {--%>
-<%--        Swal.fire({--%>
-<%--            position: 'top-end', // Vị trí của thông báo--%>
-<%--            toast: true, // Thiết lập kiểu thông báo là "toast"--%>
-<%--            showConfirmButton: false, // Không hiển thị nút xác nhận--%>
-<%--            timer: 3000, // Thời gian hiển thị (đơn vị là milliseconds)--%>
-<%--            width: '300px', // Đặt chiều rộng của thông báo--%>
-<%--            text: 'Đơn hàng được hủy thất bại!',--%>
-<%--            icon: 'error',--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
 
 </body>
 </html>

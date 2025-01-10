@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--    <link rel="icon" href="img/background_title.jpg" type="image/x-icon">--%>
-    <title>SHOP 5 ANH EM</title>
+    <title> 5 ANH EM</title>
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -77,7 +77,7 @@
                 <i class="fas fa-laugh-wink"></i>
             </div>
             <div class="sidebar-brand-text mx-3">
-                    SHOP 5 ANH EM
+                    5 ANH EM
             </div>
         </a>
         <!-- Divider -->
@@ -87,15 +87,15 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+                <span>Quản lý giày</span>
 
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h4 class="collapse-header" style="color: black; font-weight: bold; font-size: 15px">Other pages:</h4>
+                   
                     <a class="collapse-item" href="/thuongHieu">Thương hiệu</a>
                     <a class="collapse-item" href="/form/hien-thi">Form</a>
-                    <a class="collapse-item" href="/GiayTheThao/create">Đăng sản phẩm</a>
+                    <a class="collapse-item" href="/GiayTheThao/create">Đăng bán giày</a>
 
                 </div>
             </div>
@@ -106,12 +106,11 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>User</span>
+                <span>Quản lý danh mục</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">User:</h6>
                     <a class="collapse-item" href="/user/hien-thi">Nhân viên</a>
 
                     <a class="collapse-item" href="/KhachHang/list">Khách hàng</a>
@@ -119,8 +118,8 @@
 
                     <%--                    <a class="collapse-item" href="/authentication/enregistrer">Register</a>--%>
                     <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other User:</h6>
-                    <a class="collapse-item" href="/GiayTheThao/listGiayTheThao">Giầy thể thao</a>
+                    
+                    <a class="collapse-item" href="/GiayTheThao/listGiayTheThao">Giày thể thao</a>
                     <a class="collapse-item" href="/MauSac/list">Màu sắc</a>
                     <a class="collapse-item" href="/Size/hien-thi">Size</a>
                     <a class="collapse-item" href="/chuongTrinhGiamGia/sanPham">Khuyến mại</a>
@@ -135,7 +134,12 @@
         <li class="nav-item">
             <a class="nav-link" href="/thongKeChuanData">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Thống kê</span></a>
+                <span>Thống kê báo cáo</span></a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Admin/xacNhanDonHangKhachHangAll">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Quản lý hoá đơn</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/BanHangTaiQuay">
@@ -160,12 +164,9 @@
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
+                        
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                            
                         </div>
 
                     </div>
@@ -173,7 +174,7 @@
                 </form>
 
                 <div class="hello" style="margin-left: 100px">
-                    <a style="color: red">Hello: ${userLog.tenUser} ( ${userLog.role} )</a>
+                    <a style="color: red">Xin chào: ${userLog.tenUser} ( ${userLog.role} )</a>
                 </div>
 
                 <%--                <div class="cart-icon" style="text-align: center; margin-left: 200px">--%>
@@ -223,12 +224,12 @@
                              aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="/TrangChu/ThongTinCaNhan/Admin">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
+                                Hồ sơ
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/UserLog/logout" >
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Đăng xuất
                             </a>
 
                         </div>

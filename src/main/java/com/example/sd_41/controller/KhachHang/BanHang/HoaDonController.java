@@ -307,7 +307,7 @@ public class HoaDonController {
                                     System.out.println("Lưu lại thông tin hóa đơn khi thanh toán bằng momo");
 
                                     hoaDon.setPhiShip(BigDecimal.valueOf(phiShipDou));
-                                    hoaDon.setGhiChu("Tên người nhận hàng: " + tenKhachHangCu + "" + "\nSố điện thoại nhận hàng: " + soDienThoaiCuMomo + ",\n Địa chỉ giao hàng: " + diaChiCuMomo + "," + thanhPhoCuMomo + "," + quocGiaCuMomo);
+                                    hoaDon.setGhiChu("Tên người nhận hàng: " + tenKhachHangCu + "" + "\nSố điện thoại nhận hàng: " + soDienThoaiCuMomo + ",\nĐịa chỉ giao hàng: " + diaChiCuMomo + "," + thanhPhoCuMomo + "," + quocGiaCuMomo);
                                     hoaDon.setMess(messCuMomo);
                                     hoaDon.setHinhThuc(0);
                                     hoaDon.setHinhThucThanhToan(2);
@@ -326,7 +326,7 @@ public class HoaDonController {
 
                         }
 
-                        //Thanh toán bằng địa chỉ cũ qua thanh toán khi nhận hàng
+                     // Thanh toán bằng địa chỉ cũ qua thanh toán khi nhận hàng
                         if ("cash".equals(hinhThucThanhToan)) {
 
                             System.out.println("Bạn chọn thanh toán bằng hình thức thanh toán khi nhận hàng");
@@ -334,6 +334,7 @@ public class HoaDonController {
 
                             if (hoaDon != null) {
 
+                                // Lấy giá trị từ request
                                 String tenKhachHangCu = request.getParameter("tenKhachHang");
                                 String soDienThoaiCu = request.getParameter("soDienThoai");
                                 String quocGiaCu = request.getParameter("quocGia");
@@ -342,111 +343,80 @@ public class HoaDonController {
                                 String messCu = request.getParameter("mess");
                                 String thanhTienTong1 = request.getParameter("tongTien");
 
-                                // Lấy giá trị ship từ request
-                                String ship = request.getParameter("ship");
+                                // Lấy giá trị ship từ request (hoặc có thể là giá trị cố định)
+                                String ship = "30000";  // phí ship cố định
 
-                                // Loại bỏ ký tự không mong muốn
-                                ship = ship.replaceAll("[^0-9]", "");
+                                // Chuyển giá trị thanhTienTong1 và phí ship sang kiểu số (Double)
+                                if (thanhTienTong1 != null && !thanhTienTong1.isEmpty()) {
+                                    try {
+                                        double thanhTienTong = Double.parseDouble(thanhTienTong1);  // Tiền hàng
+                                        double shipAmount = Double.parseDouble(ship);  // Phí ship
 
-                                // Kiểm tra xem chuỗi có giá trị không rỗng
-                                if (!ship.isEmpty()) {
-                                    // Chuyển đổi chuỗi thành số nguyên
-                                    int shipValue = Integer.parseInt(ship);
+                                        // Tính tổng tiền (tiền hàng + phí ship)
+                                        double tongTien = thanhTienTong + shipAmount;
 
-                                    // In giá trị đã chuyển đổi
-                                    System.out.println("Giá trị ship sau khi chuyển đổi: " + shipValue);
+                                        // Cập nhật tổng tiền vào hóa đơn
+                                        //hoaDon.setTongTien(tongTien);
 
-                                } else {
+                                        // Lưu lại hóa đơn với các thay đổi
+                                        hoaDon.setTrangThai(1);  // Hóa đơn đã thanh toán
+                                        hoaDon.setTrangThaiMoney(0);  // Chưa trả tiền
+                                        hoaDon.setHinhThuc(0);  // Thanh toán khi nhận hàng
+                                        hoaDon.setHinhThucThanhToan(3);  // Hình thức thanh toán COD (thanh toán khi nhận hàng)
+                                        hoaDon.setNgayThanhToan(LocalDateTime.now());  // Ngày thanh toán
+                                        hoaDon.setNgayTao(LocalDateTime.now());  // Ngày tạo hóa đơn
+                                        hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangCu + ",\nSố điện thoại nhận hàng: " + soDienThoaiCu + ",\n Địa chỉ giao hàng: " + diaChiCu + "," + thanhPhoCu + "," + quocGiaCu);
+                                        hoaDon.setMess(messCu);
 
-                                    System.out.println("Không có giá trị ship hợp lệ.");
+                                        // Xử lý số lượng hàng trong kho
+                                        List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findByHoaDon_Id(hoaDonId);
+                                        List<UUID> giayTheThaoChiTietIdsToDelete = new ArrayList<>();
+                                        model.addAttribute("hoaDonChiTiets", hoaDonChiTiets);
 
-                                }
+                                        // Tìm hóa đơn để tính số lượng
+                                        for (HoaDonChiTiet hoaDonChiTietList : hoaDonChiTiets) {
+                                            String soLuongMuaToString = hoaDonChiTietList.getSoLuong();
+                                            int soLuongMua = Integer.parseInt(soLuongMuaToString);
 
-                                if (ship.matches("\\d*\\.?\\d*")) {
-                                    BigDecimal shipBigDecimal = new BigDecimal(ship);
-                                    System.out.println("Giá trị shipBigDecimal: " + shipBigDecimal);
-                                    hoaDon.setPhiShip(shipBigDecimal);
+                                            // Số lượng có trong kho
+                                            GiayTheThaoChiTiet giayTheThaoChiTiet = hoaDonChiTietList.getGiayTheThaoChiTiet();
+                                            String soLuongCoToString = giayTheThaoChiTiet.getSoLuong();
+                                            int soLuongCo = Integer.parseInt(soLuongCoToString);
 
-                                    //Tính thành tiền
-                                    BigDecimal thanhTienBigDecemal = new BigDecimal(thanhTienTong1);
+                                            giayTheThaoChiTiet.setSoLuong(Integer.toString(soLuongCo - soLuongMua));
+                                            giayTheThaoChiTietRepository.save(giayTheThaoChiTiet);
 
-                                    // Trừ giá trị ship từ tổng tiền
-                                    BigDecimal thanhTienSauShip = thanhTienBigDecemal.subtract(shipBigDecimal);
-                                    hoaDon.setThanhTien(thanhTienSauShip);
+                                            UUID giayTheThaoChiTietId = hoaDonChiTietList.getGiayTheThaoChiTiet().getId();
+                                            giayTheThaoChiTietIdsToDelete.add(giayTheThaoChiTietId);
+                                        }
 
+                                        // Xóa các chi tiết giày trong giỏ hàng
+                                        UUID idKhachHang = (UUID) session.getAttribute("idKhachHang");
+                                        List<GioHang> gioHangList = gioHangRepository.findByKhachHang_Id(idKhachHang);
 
-                                } else {
+                                        System.out.println("Danh sách ID của giỏ hàng cho khách hàng có ID là " + idKhachHang + ":");
 
-                                    System.out.println("Chuỗi không hợp lệ");
+                                        for (GioHang gioHang : gioHangList) {
+                                            for (UUID giayTheThaoChiTietIdToDelete : giayTheThaoChiTietIdsToDelete) {
+                                                gioHangChiTietRepository.deleteByGioHang_IdAndGiayTheThaoChiTiet_Id(gioHang.getId(), giayTheThaoChiTietIdToDelete);
+                                            }
+                                        }
 
-                                }
+                                        // Lưu hóa đơn vào cơ sở dữ liệu
+                                        hoaDonRepository.save(hoaDon);
 
-                                hoaDon.setTrangThai(1);
-                                hoaDon.setTrangThaiMoney(0);
-                                hoaDon.setHinhThuc(0);
-                                hoaDon.setHinhThucThanhToan(3);
+                                        // Trả về kết quả thanh toán thành công
+                                        model.addAttribute("idKH", hoaDon.getKhachHang().getId());
+                                        return "redirect:/nguoiDung/hoaDon/thanhToan/ThanhCong";
 
-                                hoaDon.setNgayThanhToan(LocalDateTime.now());
-                                hoaDon.setNgayTao(LocalDateTime.now());
-                                hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangCu + "," + "\nSố điện thoại nhận hàng: " + soDienThoaiCu + ",\n Địa chỉ giao hàng: " + diaChiCu + "," + thanhPhoCu + "," + quocGiaCu);
-                                hoaDon.setMess(messCu);
-
-                                //Lấy số lượng hiện tại trừ đi
-
-                                List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findByHoaDon_Id(hoaDonId);
-                                List<UUID> giayTheThaoChiTietIdsToDelete = new ArrayList<>();
-
-                                model.addAttribute("hoaDonChiTiets", hoaDonChiTiets);
-
-
-                                //Tìm hóa đơn để tính số lượng
-                                for (HoaDonChiTiet hoaDonChiTietList : hoaDonChiTiets) {
-
-                                    //Số lượng mua của khách hàng
-                                    String soLuongMuaToString = hoaDonChiTietList.getSoLuong();
-                                    int soLuongMua = Integer.parseInt(soLuongMuaToString);
-
-                                    //Số lượng có trong kho
-                                    GiayTheThaoChiTiet giayTheThaoChiTiet = hoaDonChiTietList.getGiayTheThaoChiTiet();
-                                    String soLuongCoToString = giayTheThaoChiTiet.getSoLuong();
-                                    int soLuongCo = Integer.parseInt(soLuongCoToString);
-
-                                    giayTheThaoChiTiet.setSoLuong(Integer.toString(soLuongCo - soLuongMua));
-                                    giayTheThaoChiTietRepository.save(giayTheThaoChiTiet);
-
-                                    //Todo code fix bug
-                                    UUID giayTheThaoChiTietId = hoaDonChiTietList.getGiayTheThaoChiTiet().getId();
-                                    giayTheThaoChiTietIdsToDelete.add(giayTheThaoChiTietId);
-
-                                }
-
-                                UUID idKhachHang = (UUID) session.getAttribute("idKhachHang");
-                                List<GioHang> gioHangList = gioHangRepository.findByKhachHang_Id(idKhachHang);
-
-                                System.out.println("Danh sách ID của giỏ hàng cho khách hàng có ID là " + idKhachHang + ":");
-
-                                for (GioHang gioHang : gioHangList) {
-
-                                    System.out.println(gioHang.getId());
-
-                                    for (UUID giayTheThaoChiTietIdToDelete : giayTheThaoChiTietIdsToDelete) {
-
-                                        gioHangChiTietRepository.deleteByGioHang_IdAndGiayTheThaoChiTiet_Id(gioHang.getId(), giayTheThaoChiTietIdToDelete);
-
+                                    } catch (NumberFormatException e) {
+                                        // Xử lý trường hợp nếu không thể chuyển đổi giá trị thành số
+                                        System.out.println("Lỗi chuyển đổi giá trị tiền hàng: " + e.getMessage());
                                     }
-
+                                } else {
+                                    System.out.println("Giá trị tiền hàng không hợp lệ!");
                                 }
-
-
-                                hoaDonRepository.save(hoaDon);
-
-
-                                model.addAttribute("idKH", hoaDon.getKhachHang().getId());
-                                return "redirect:/nguoiDung/hoaDon/thanhToan/ThanhCong";
-
-
                             }
-
                         }
 
                         //Thanh toán bằng ví điện tử
@@ -474,7 +444,7 @@ public class HoaDonController {
                                     String thanhTienTong1 = request.getParameter("tongTien");
 
                                     // Lấy giá trị ship từ request
-                                    String ship = request.getParameter("ship");
+                                    String ship = "30000";
 
                                     // Loại bỏ ký tự không mong muốn
                                     ship = ship.replaceAll("[^0-9]", "");
@@ -557,7 +527,7 @@ public class HoaDonController {
 
                                     hoaDon.setNgayThanhToan(LocalDateTime.now());
                                     hoaDon.setNgayTao(LocalDateTime.now());
-                                    hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangCu + "" + ",\n  Số điện thoại nhận hàng: " + soDienThoaiCu + ",\n Địa chỉ giao hàng: " + diaChiCu + "," + thanhPhoCu + "," + quocGiaCu);
+                                    hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangCu + "" + ",\nSố điện thoại nhận hàng: " + soDienThoaiCu + ",\nĐịa chỉ giao hàng: " + diaChiCu + "," + thanhPhoCu + "," + quocGiaCu);
                                     hoaDon.setMess(messCu);
 
                                     //Lấy số lượng hiện tại trừ đi
@@ -710,7 +680,7 @@ public class HoaDonController {
                                     System.out.println("Lưu lại thông tin hóa đơn khi thanh toán bằng momo");
 
                                     hoaDon.setPhiShip(BigDecimal.valueOf(phiShipDou));
-                                    hoaDon.setGhiChu("Tên khách hàng:" + tenKhachHangMoiMomo + "\nSố điện thoại nhận hàng: " + soDienThoaiMoiMomo + ",\n Địa chỉ giao hàng: " + diaChiMoiMomo + "," + thanhPhoMoiMomo + "," + quocGiaMoiMomo);
+                                    hoaDon.setGhiChu("Tên khách hàng:" + tenKhachHangMoiMomo + "\nSố điện thoại nhận hàng: " + soDienThoaiMoiMomo + ",\nĐịa chỉ giao hàng: " + diaChiMoiMomo + "," + thanhPhoMoiMomo + "," + quocGiaMoiMomo);
                                     hoaDon.setMess(messMoiMomo);
                                     hoaDon.setHinhThuc(0);
                                     hoaDon.setHinhThucThanhToan(2);
@@ -842,11 +812,11 @@ public class HoaDonController {
                                 hoaDon.setNgayThanhToan(LocalDateTime.now());
                                 hoaDon.setNgayTao(LocalDateTime.now());
                                 hoaDon.setTrangThai(1);
-                                hoaDon.setGhiChu("Số điện thoại nhận hàng: " + soDienThoaiMoi + ",\n Địa chỉ giao hàng: " + diaChiMoi + "," + thanhPhoMoi + "," + quocGiaMoi);
+                                hoaDon.setGhiChu("Số điện thoại nhận hàng: " + soDienThoaiMoi + ",\nĐịa chỉ giao hàng: " + diaChiMoi + "," + thanhPhoMoi + "," + quocGiaMoi);
                                 hoaDon.setMess(messMoi);
 
 
-                                String ship = request.getParameter("ship");
+                                String ship = "30000";
 
                                 if (ship.matches("\\d*\\.?\\d*")) {
                                     BigDecimal shipBigDecimal = new BigDecimal(ship);
@@ -948,7 +918,7 @@ public class HoaDonController {
                                     String thanhTienMomo = request.getParameter("tongTien");
 
                                     // Lấy giá trị ship từ request
-                                    String ship = request.getParameter("ship");
+                                    String ship = "30000";
 
                                     // Loại bỏ ký tự không mong muốn
                                     ship = ship.replaceAll("[^0-9]", "");
@@ -1031,7 +1001,7 @@ public class HoaDonController {
 
                                     hoaDon.setNgayThanhToan(LocalDateTime.now());
                                     hoaDon.setNgayTao(LocalDateTime.now());
-                                    hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangMoiMomo + "" + ",\n Số điện thoại nhận hàng: " + soDienThoaiMoiMomo + ",\n Địa chỉ giao hàng: " + diaChiMoiMomo + "," + thanhPhoMoiMomo + "," + quocGiaMoiMomo);
+                                    hoaDon.setGhiChu("Tên khách hàng: " + tenKhachHangMoiMomo + "" + ",\nSố điện thoại nhận hàng: " + soDienThoaiMoiMomo + ",\nĐịa chỉ giao hàng: " + diaChiMoiMomo + "," + thanhPhoMoiMomo + "," + quocGiaMoiMomo);
                                     hoaDon.setMess(messMoiMomo);
 
                                     //Lấy số lượng hiện tại trừ đi
@@ -1344,17 +1314,17 @@ public class HoaDonController {
     }
 
 
-    //Todo code chờ xác nhận bên phía khác hàng
-
     @GetMapping("/KhachHang/HoaDon/ChoXacNhan/*")
     public ModelAndView hoaDonChoXacNhan(
             @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
             HttpServletRequest request, Model model) {
 
+        // Lấy mã khách hàng từ URL
         String url = request.getRequestURI();
         String[] parts = url.split("/KhachHang/HoaDon/ChoXacNhan/");
-        String ma = parts[1];
+        String ma = parts.length > 1 ? parts[1] : null;
 
+        // Xử lý mã khách hàng và thêm vào model
         try {
             KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
             model.addAttribute("maKH", khachHang.getMaKhachHang());
@@ -1364,19 +1334,22 @@ public class HoaDonController {
 
         KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
 
-        // Sắp xếp danh sách đơn hàng theo ngày thanh toán tăng dần (mới nhất lên đầu tiên)
-        List<HoaDon> sortedList = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(khachHang.getId(), 1, pageNo, 5)
-                .getContent()
-                .stream()
-                .sorted(Comparator.comparing(HoaDon::getNgayThanhToan))
-                .collect(Collectors.toList());
+        // Lấy danh sách hóa đơn theo phân trang
+        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(
+                khachHang.getId(), 
+                1, // Trạng thái đơn hàng
+                pageNo, 
+                5 // Số phần tử mỗi trang
+        );
 
-        model.addAttribute("page", new PageImpl<>(sortedList));
+        // Thêm đối tượng Page vào model
+        model.addAttribute("page", page);
 
+        // Trả về view
         ModelAndView mav = new ModelAndView("/templates/Users/Layouts/TrangThaiDonHang/KhachHang/choXacNhanBenKhachHang");
         return mav;
-
     }
+
 
 
     //Todo code view thông tin sản phẩm khách hàng mua bên phía khách hàng
@@ -1453,37 +1426,45 @@ public class HoaDonController {
 
     }
 
-    //Todo code đang giao hàng bên phía khách hàng
     @GetMapping("/KhachHang/HoaDon/DangGiaoHang/*")
     public ModelAndView dangGiaoHangBenPhiaKhachHang(
             @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
             HttpServletRequest request,
             Model model
     ) {
-
+        // Lấy mã khách hàng từ URL
         String url = request.getRequestURI();
         String[] parts = url.split("/KhachHang/HoaDon/DangGiaoHang/");
-        String ma = parts[1];
+        String ma = parts.length > 1 ? parts[1] : null;
 
+        // Xử lý mã khách hàng và thêm vào model
+        KhachHang khachHang = null;
         try {
-
-            KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
+            khachHang = khachHangRepository.findByMaKhachHang(ma);
             model.addAttribute("maKH", khachHang.getMaKhachHang());
-
         } catch (Exception e) {
-
             e.printStackTrace();
             model.addAttribute("maKH", "2");
-
         }
 
-        KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
-        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(khachHang.getId(), 3, pageNo, 5);
+        if (khachHang == null) {
+            throw new IllegalArgumentException("Không tìm thấy khách hàng với mã: " + ma);
+        }
+
+        // Lấy danh sách hóa đơn phân trang
+        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(
+                khachHang.getId(), 
+                3, // Trạng thái đang giao
+                pageNo, 
+                5 // Số phần tử mỗi trang
+        );
+
+        // Trả về ModelAndView
         ModelAndView mav = new ModelAndView("/templates/Users/Layouts/TrangThaiDonHang/KhachHang/dangGiaoHangBenPhiaKhachHang");
         mav.addObject("page", page);
         return mav;
-
     }
+
 
     //Todo code giao hàng thành công
     @PostMapping("/KhachHang/HoaDon/XacNhanGiaoHangThanhCong")
@@ -1513,39 +1494,45 @@ public class HoaDonController {
 
     }
 
-    //Todo code giao hàng thành công
     @GetMapping("/KhachHang/HoaDon/GiaoHangThanhCong/*")
     public ModelAndView giaoHangThanhCong(
             Model model,
             @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
             HttpServletRequest request
-
     ) {
-
+        // Lấy mã khách hàng từ URL
         String url = request.getRequestURI();
         String[] parts = url.split("/KhachHang/HoaDon/GiaoHangThanhCong/");
-        String ma = parts[1];
+        String ma = parts.length > 1 ? parts[1] : null;
+
+        KhachHang khachHang = null;
 
         try {
-
-            KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
+            khachHang = khachHangRepository.findByMaKhachHang(ma);
             model.addAttribute("maKH", khachHang.getMaKhachHang());
-
         } catch (Exception e) {
-
+            e.printStackTrace();
             model.addAttribute("maKH", "2");
-
         }
 
-        KhachHang khachHang = khachHangRepository.findByMaKhachHang(ma);
-        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(khachHang.getId(), 4, pageNo, 5);
-        ModelAndView mav = new ModelAndView("/templates/Users/Layouts/TrangThaiDonHang/KhachHang/giaoHangThanhCongBenPhiaKhachHang");
+        if (khachHang == null) {
+            throw new IllegalArgumentException("Không tìm thấy khách hàng với mã: " + ma);
+        }
 
+        // Lấy danh sách hóa đơn phân trang
+        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByKhachHangAndTrangThai(
+                khachHang.getId(), 
+                4, // Trạng thái giao hàng thành công
+                pageNo, 
+                5 // Số phần tử mỗi trang
+        );
+
+        // Tạo ModelAndView
+        ModelAndView mav = new ModelAndView("/templates/Users/Layouts/TrangThaiDonHang/KhachHang/giaoHangThanhCongBenPhiaKhachHang");
         mav.addObject("page", page);
         return mav;
-
-
     }
+
 
 
     //Todo code hủy đơn hàng bên phía khách hàng
@@ -1674,9 +1661,10 @@ public class HoaDonController {
     //Todo code All xác nhận bên phía admin
     @GetMapping("/Admin/xacNhanDonHangKhachHangAll")
     public String showViewXacNhanDonHangAllKhachHang(Model model) {
-
+    			
 
         model.addAttribute("listHoaDon", hoaDonRepository.findAll());
+        
 
         return "/templates/Admin/TrangThaiDonHang/viewHoaDonTrangThaiAll";
 
@@ -1687,22 +1675,26 @@ public class HoaDonController {
 
     @GetMapping("/Admin/xacNhanDonHangKhachHang")
     public ModelAndView adminXacNhanDonHangChoKhachHang(
-            Model model,
-            @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
-            HttpServletRequest request
+            @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo
     ) {
+        // Gọi service để lấy danh sách hóa đơn theo trang
+        Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByTrangThai(pageNo, 5, 1);
 
-        // Sắp xếp danh sách đơn hàng theo ngày thanh toán tăng dần (cũ nhất lên đầu tiên)
-        List<HoaDon> sortedList = hoaDonServiceImpl.listHoaDonFindByTrangThai(pageNo, 5, 1)
-                .getContent()
+        // Sắp xếp danh sách hóa đơn theo ngày thanh toán
+        List<HoaDon> sortedList = page.getContent()
                 .stream()
                 .sorted(Comparator.comparing(HoaDon::getNgayThanhToan))
                 .collect(Collectors.toList());
 
-        Page<HoaDon> page = new PageImpl<>(sortedList);
+        // Tạo một Page mới với danh sách đã sắp xếp nhưng vẫn giữ nguyên thông tin phân trang
+        Page<HoaDon> sortedPage = new PageImpl<>(
+                sortedList,
+                page.getPageable(),
+                page.getTotalElements() // Giữ tổng số phần tử để phân trang đúng
+        );
 
         ModelAndView mav = new ModelAndView("/templates/Admin/TrangThaiDonHang/choXacNhan");
-        mav.addObject("page", page);
+        mav.addObject("page", sortedPage);
 
         return mav;
     }
@@ -1790,23 +1782,30 @@ public class HoaDonController {
 
     }
 
-    //Todo code đang giao hàng
+  //Todo code đang giao hàng admin
     @GetMapping("/Admin/HoaDon/XacNhanHoaDonKhachHangDangGiao")
     public ModelAndView showDangGiaoHang(
-
-            @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
-            HttpServletRequest request,
-            Model model
-
+            @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo
     ) {
-
+        // Lấy danh sách hóa đơn theo trạng thái (3 = đang giao)
         Page<HoaDon> page = hoaDonServiceImpl.listHoaDonFindByTrangThai(pageNo, 5, 3);
+
+        // Tạo ModelAndView và thêm dữ liệu cần thiết
         ModelAndView mav = new ModelAndView("/templates/Admin/TrangThaiDonHang/dangGiaoHang");
         mav.addObject("page", page);
-        return mav;
 
+        // Thêm thông tin hỗ trợ debug nếu cần
+        mav.addObject("currentPage", pageNo);
+        mav.addObject("totalPages", page.getTotalPages());
+        mav.addObject("totalElements", page.getTotalElements());
+
+        return mav;
     }
 
+//huỷ đơn hàng khi đang giao
+    
+    
+    
     //Todo code hoàn thành giao hàng
     @GetMapping("/Admin/HoaDon/XacNhanHoaDonGiaoHangThanhCongHoanThanh")
     public ModelAndView showGiaoHangHoanThanh(
@@ -1990,18 +1989,18 @@ public class HoaDonController {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(email);
 
-            message.setSubject("Cửa hàng bán giầy thể thao Shop 5 anh em xin thông báo");
+            message.setSubject("Cửa hàng bán giày thể thao 5 Anh Em xin thông báo");
             message.setText(
-                    "Mã hóa đơn : " + maHoaDon +
+                    "Mã hóa đơn: " + maHoaDon +
                             "\n" +
-                            "Ngày thanh toán :" + ngayThanhToan +
+                            "Ngày thanh toán: " + ngayThanhToan +
                             "\n" +
-                            "Thành tiền : " + thanhTien + "VNĐ" +
+                            "Thành tiền: " + thanhTien + "VNĐ" +
                             "\n" +
-                            "Thông tin địa chỉ nhận hàng :" + thongTinNhanHang +
+                            "" + thongTinNhanHang +
                             "\n" +
                             "\n" +
-                            "Xin chào khách hàng : " + tenKhachHang + "\n" +
+                            "Xin chào khách hàng: " + tenKhachHang + "\n" +
                             "Có địa chỉ email là: " + email + "\n" +
                             "Cảm ơn bạn đã quan tâm đến sản phẩm của shop, đơn hàng của bạn bị hủy do: " + lyDo +
                             "" +

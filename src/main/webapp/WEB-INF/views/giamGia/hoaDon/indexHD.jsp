@@ -135,7 +135,7 @@
                                     type="radio"
                                     name="trangThai"
                                     id="notYetApplied"
-                                    value="0"
+                                    value="-1"
                             />
                             <label class="form-check-label" for="notYetApplied">
                                 Chưa áp dụng
@@ -231,12 +231,12 @@
                     >
                         <tr class="${gg.id}">
                             <td>${status.index+1}</td>
-                            <td style="text-align: left; max-width: 150px">
+                            <td style="text-align: left; max-width: 200px">
                                     ${gg.tenChuongTrinh}
                             </td>
                             <td>${gg.phanTramGiam}</td>
                             <td><b>Từ:</b> ${gg.ngayBatDau} <br><b>Đến:</b> ${gg.ngayKetThuc}</td>
-                            <td style="max-width: 100px;">${hinhThuc}</td>
+                            <td style="max-width: 50px;">${hinhThuc}</td>
                             <td style="color: black">${gg.trangThai==1?"Kích hoạt":"Chưa áp dụng"}</td>
                             <td>
 

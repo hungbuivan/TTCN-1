@@ -57,5 +57,8 @@ public interface GiayTheThaoChiTietRepository extends JpaRepository<GiayTheThaoC
 
  // Phương thức xóa GiayTheThaoChiTiet theo GiayTheThaoId
     void deleteById(UUID id);
+  
+
+
 
 }

@@ -40,5 +40,9 @@ public class SizeService {
         GiayTheThao gtt = gttService.getOne(idGtt);
         return sizeRepository.getSizeByGtt(gtt);
     }
+    public List<Size> getByTrangThai(int trangThai) {
+        // Sử dụng SizeRepository để lọc theo trạng thái
+        return sizeRepository.findByTrangThai(trangThai);
+    }
 
 }

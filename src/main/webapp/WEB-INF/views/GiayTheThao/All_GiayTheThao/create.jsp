@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create dữ liệu giầy thể thao</title>
+    <title>Create dữ liệu giày thể thao</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <%--    <link href="/css/GiayTheThao/All_GiayTheThao/create.css" rel="stylesheet">--%>
 
@@ -23,7 +23,7 @@
         <button style="margin-bottom: 10px;" type="submit" class="btn btn-primary">Back</button>
     </a>
 
-    <h3 style="text-align: center; color: black; margin-top: 0px; margin-bottom: 30px">Thêm dữ liệu bảng giầy thể thao</h3>
+    <h3 style="text-align: center; color: black; margin-top: 0px; margin-bottom: 30px">Thêm dữ liệu bảng giày thể thao</h3>
 
     <frm:form
                     modelAttribute="giayTheThao"
@@ -56,28 +56,29 @@
 						</div>
                     </div>
                 </div>
+                
 
-                <div class="form-row">
+                <div class="form-row container-fluid" >
                     <div class="form-group col-md-4">
                         <label >Hướng dẫn bảo quản </label>
                         <span style="color: red">*</span>
                         <input type="text" class="form-control" name="huongDanBaoQuan" placeholder="Nhập hướng dẫn bảo quản" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label >Lót giầy</label>
+                        <label >Lót giày</label>
                         <span style="color: red">*</span>
 						<input type="text" class="form-control" name="lotGiay" placeholder="Nhập lót giày" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Cổ giầy</label>
+                        <label>Cổ giày</label>
                         <span style="color: red">*</span>
                         <input type="text" class="form-control" name="coGiay" placeholder="Nhập loại cổ giày" required>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row container-fluid" >
                     <div class="form-group col-md-4">
-                        <label >Đế giầy</label>
+                        <label >Đế giày</label>
                         <span style="color: red">*</span>
 						<input type="text" class="form-control" name="deGiay" placeholder="Nhập loại đế giày" required>
                     </div>
@@ -108,15 +109,15 @@
 						<input type="text" class="form-control" name="kieuBuoc" placeholder="Nhập kiểu buộc" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Đinh tán giầy</label>
+                        <label>Đinh tán giày</label>
                         <span style="color: red">*</span>
 						<input type="text" class="form-control" name="dinhTanGiay" placeholder="Nhập đinh tán giày" required>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row container-fluid" >
                     <div class="form-group col-md-4">
-                        <label>Tên giầy thể thao</label>
+                        <label>Tên giày thể thao</label>
                         <span style="color: red">*</span>
                         <frm:input id="tenGiayTheThao" required="" type="text" class="form-control" path="tenGiayTheThao" cssStyle="" placeholder="Input text" value=""/>
                         <frm:errors path="tenGiayTheThao"></frm:errors>
@@ -148,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+               <div class="form-row container-fluid" >
                     <div class="form-group col-md-12">
                         <label>Mô tả</label>
                         <frm:textarea path="moTa" class="form-control" type="text" cssStyle="height: 100px"/>
@@ -156,7 +157,7 @@
                     </div>
                 </div>
 
-        <button  style="margin-bottom: 30px; margin-left: 470px; margin-top: 30px" type="submit" class="btn btn-primary">Create</button>
+        <button  style="margin-bottom: 30px; margin-left: 470px; margin-top: 30px" type="submit" class="btn btn-primary;">Create</button>
     </frm:form>
 
 </div>

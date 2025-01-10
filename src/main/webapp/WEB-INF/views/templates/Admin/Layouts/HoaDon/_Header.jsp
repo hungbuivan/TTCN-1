@@ -91,7 +91,7 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header" style="color: black; font-size: 13px;">Pages</h6>
-                    <a class="collapse-item" href="/GiayTheThao/listGiayTheThao">Giầy thể thao</a>
+                    <a class="collapse-item" href="/GiayTheThao/listGiayTheThao">Giày thể thao</a>
                     <div class="collapse-divider"></div>
                     <h4 class="collapse-header" style="color: black; font-weight: bold; font-size: 15px">Other pages:</h4>
                     <a class="collapse-item" href="#">Sản phẩm</a>

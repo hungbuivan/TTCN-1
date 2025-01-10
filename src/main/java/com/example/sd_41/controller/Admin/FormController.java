@@ -31,17 +31,17 @@ public class FormController {
     }
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam(name = "num",defaultValue = "0") Integer num) {
-        Page<Form> formPage = formRepository.findAll(PageRequest.of(num,3));
+    public String hienThi(Model model, @RequestParam(name = "num",defaultValue = "0") Integer num) { //num đại diện cho số trang mà người dùng muốn hiển thị, num mặc định là 0
+        Page<Form> formPage = formRepository.findAll(PageRequest.of(num,3)); // trang 0 và số lượng hiển thị trên trang là 3 sau đó truyền dữ liệu sang giao diện qua model
         model.addAttribute("list", formPage.getContent());
         model.addAttribute("next",num);
-        model.addAttribute("totalPages", formPage.getTotalPages());
+        model.addAttribute("totalPages", formPage.getTotalPages()); // nếu database có 10 bản ghi thì sẽ phân làm 4 trang 10/3
         return "/Form/index";
     }
     @GetMapping("/search")
     public String searchByName(@RequestParam("tenForm") String tenForm, Model model) {
         List<Form> searchResults = formService.searchByTen(tenForm);
-        model.addAttribute("list", searchResults);
+        model.addAttribute("list", searchResults); 
         return "/Form/index";
     }
     @GetMapping("/filter")

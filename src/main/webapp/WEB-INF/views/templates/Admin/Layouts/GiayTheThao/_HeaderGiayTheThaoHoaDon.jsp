@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%--    <link rel="icon" href="img/background_title.jpg" type="image/x-icon">--%>
-    <title>SHOP 5 ANH EM</title>
+    <title> 5 ANH EM</title>
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -77,7 +77,7 @@
                 <i class="fas fa-laugh-wink"></i>
             </div>
             <div class="sidebar-brand-text mx-3">
-                    SHOP 5 ANH EM
+                     5 ANH EM
             </div>
         </a>
         <!-- Divider -->
@@ -87,7 +87,7 @@
             <a class="nav-link collapsed" href="/GiayTheThao/listGiayTheThao" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Giầy thể thao</span>
+                <span>Giày thể thao</span>
 
             </a>
 
@@ -104,7 +104,13 @@
         <li class="nav-item">
             <a class="nav-link" href="/thongKeChuanData">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Thống kê</span></a>
+                <span>Thống kê báo cáo</span></a>
+        </li>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Admin/xacNhanDonHangKhachHangAll">
+                <i class="fas fa-fw fa-file-text"></i>
+                <span>Quản lý hoá đơn</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/BanHangTaiQuay">
@@ -129,12 +135,9 @@
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
+                        
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                            
                         </div>
 
                     </div>
@@ -192,20 +195,20 @@
                              aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
+                                Hồ sơ
                             </a>
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
+                                Cài đặt
                             </a>
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
+                                Hoạt động
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/UserLog/logout" >
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                               Đăng xuất
                             </a>
 
                         </div>

@@ -14,6 +14,7 @@
         modelAttribute="Size"
         method="post"
         enctype="multipart/form-data"
+        class = "container-fluid"
 >
 
 
@@ -51,7 +52,7 @@
         </div>
     </div>
 
-    <button class="btn btn-success">Add</button>
+    <button class="btn btn-success">Thêm</button>
     </div>
 
 

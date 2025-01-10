@@ -77,9 +77,6 @@ public class GiayTheThaoController {
     @Autowired
     private GiayTheThaoService giayTheThaoService;
     
-    @Autowired
-    private GiayTheThaoChiTietService giayTheThaoChiTietService;
-
     //Todo code list giầy thể thao
     @GetMapping("GiayTheThao/listGiayTheThao")
     public String listShowViewGiayTheThao(Model model,

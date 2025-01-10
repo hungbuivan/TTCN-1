@@ -49,7 +49,7 @@
                         </div>
                     </div>
 					<span class="login100-form-title" style="color: black; font-size: 30px; font-weight: bold" >
-                        Đăng nhập
+                        Xin Chào!
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "....@email.com">

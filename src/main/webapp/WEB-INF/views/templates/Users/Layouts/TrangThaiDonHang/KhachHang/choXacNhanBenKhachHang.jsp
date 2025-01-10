@@ -80,7 +80,7 @@
 
                         </td>
                         <td>
-                            <fmt:formatNumber type="" value="${list.thanhTien}" pattern="#,##0.###" /> VNĐ
+                            <fmt:formatNumber type="" value="${list.thanhTien + 30000}" pattern="#,##0.###" /> VNĐ
                         </td>
                         <td style="width: 300px">${list.ghiChu}</td>
                         <td>
@@ -97,12 +97,9 @@
 
 
 
-
-            <ul class="pagination" style="width: 30px;height: 30px">
+<ul class="pagination" style="width: 30px;height: 30px">
                 <c:if test="${not page.first}">
-                    <li class="page-item">
-                        <a href="?pageNo=${page.number -1}" style="width: 30px;height: 40px">Pre</a>
-                    </li>
+                    
                 </c:if>
                 <c:forEach begin="0" end="${page.totalPages > 1 ? page.totalPages - 1 : 0}" var="i">
                     <li class="page-item <c:if test='${i == page.number}'>active</c:if>">
@@ -110,9 +107,7 @@
                     </li>
                 </c:forEach>
                 <c:if test="${not page.last}">
-                    <li class="page-item">
-                        <a href="?pageNo=${page.number +1}" style="width: 30px;height: 40px">Next</a>
-                    </li>
+                    
                 </c:if>
             </ul>
         </form>

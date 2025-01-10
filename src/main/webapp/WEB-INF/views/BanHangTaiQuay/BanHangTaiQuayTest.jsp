@@ -183,6 +183,15 @@
 		}
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+   
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Custom styles for this template-->
+    
 </head>
 <body>
 
@@ -191,7 +200,16 @@
         <div
                 class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
         >
-            <a href="http://localhost:8080/TrangChu/Admin/home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" id="banner">5 ANH EM</a>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/TrangChu/Admin/home" style="text-decoration: none">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">
+                    SHOP 5 ANH EM
+            </div>
+        </a>
+
+
 
             <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
@@ -264,19 +282,19 @@
                     </div>
                 </div>
 
-                <input type="search" name="search-name" id="search-input">
+              
 
 
-                <button id="search-btn"><i class="bi bi-search"></i></button>
+                <button id="search-btn" style="display:none"></button>
                 <button id="reset"><i class="bi bi-arrow-clockwise"></i></button>
 				
 				<!--mới thêm-->
-				<div class="col-4">
+				<div class="col-5">
 				    <input
 				        type="text"
 				        id="searchProduct"
 				        class="form-control"
-				        placeholder="Tìm kiếm sản phẩm theo tên..."
+				        placeholder="Tìm kiếm sản phẩm "
 				        oninput="filterProducts()"
 				    />
 				</div>
@@ -305,9 +323,9 @@
                         aria-labelledby="dropdownUser1"
                 >
 
-                    <li><a class="dropdown-item" href="/TrangChu/ThongTinCaNhan/Admin">Profile</a></li>
+                    <li><a class="dropdown-item" href="/TrangChu/ThongTinCaNhan/Admin">Hồ sơ</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="/UserLog/logout">Sign out</a></li>
+                    <li><a class="dropdown-item" href="/UserLog/logout">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
@@ -532,7 +550,7 @@
                 </svg>
             </a>
             <span class="mb-3 mb-md-0 text-body-secondary"
-            >© 2023 Company, Inc</span
+            ></span
             >
         </div>
 

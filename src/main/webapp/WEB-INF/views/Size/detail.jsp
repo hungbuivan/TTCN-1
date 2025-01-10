@@ -14,6 +14,7 @@
         action="${pageContext.request.contextPath}/Size/add"
         method="POST"
         enctype="multipart/form-data"
+        class ="container-fluid"
 >
 
     <div class="form-group">
@@ -53,7 +54,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Add</button>
+    <button type="submit" class="btn btn-success">Thêm</button>
     </div>
 
 

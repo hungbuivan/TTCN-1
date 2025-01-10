@@ -133,7 +133,7 @@
                             type="radio"
                             name="trangThai"
                             id="notYetApplied"
-                            value="0"
+                            value="-1"
                     />
                     <label class="form-check-label" for="notYetApplied">
                         Chưa áp dụng
@@ -192,10 +192,10 @@
                     sử</a>
             </div>
         </div>
-        <table class="table table-hover table-light" style="width:100%">
+        <table class="table table-hover table-light" style="width:100%; text-align: center">
                     <thead style="background-color:#80bdff">
-                        <th style="background-color:#80bdff;width: 5px">STT</th>
-                        <th style="background-color:#80bdff;width: 15px">Tên chương trình</th>
+                        <th style="background-color:#80bdff">STT</th>
+                        <th style="background-color:#80bdff">Tên chương trình</th>
                         <th style="background-color:#80bdff">Giá trị giảm(%)</th>
                         <!-- <th>Số lượng</th> -->
                         <th style="background-color:#80bdff">Thời gian áp dụng</th>
@@ -216,11 +216,11 @@
                             >
                                 <tr class="${gg.id}">
                                     <td style="width: 5px">${status.index+1}</td>
-                                    <td style="text-align: left; max-width: 230px">
+                                    <td style="text-align: left; max-width: 130px">
                                             ${gg.tenChuongTrinh}
                                     </td>
-                                    <td style="width: 100px;">${gg.phanTramGiam} %</td>
-                                    <td><b>Từ:</b> ${gg.ngayBatDau} <br><b>Đến:</b> ${gg.ngayKetThuc}</td>
+                                    <td style="width: 90px;">${gg.phanTramGiam} %</td>
+                                    <td style="width: 100px;"><b>Từ:</b> ${gg.ngayBatDau} <br><b>Đến:</b> ${gg.ngayKetThuc}</td>
 
                                     <td>${hinhThuc}</td>
                                     <td style="width: 100px;">${gg.trangThai==1?"Kích hoạt":"Chưa áp dụng"}</td>
@@ -231,7 +231,7 @@
                                            class="btn btn-info">Chi tiết</a>
                                         <a
                                                 href="${pageContext.request.contextPath}/chuongTrinhGiamGia/${link}/updateForm?id=${gg.id}"
-                                                class="btn btn-success"
+                                                class="btn btn-success" 
                                         >Sửa</a
                                         >
                                     </td>

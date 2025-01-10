@@ -64,6 +64,9 @@ public class ChuongTrinhGiamGiaHoaDonController {
                            @RequestParam("ngayKetThuc") String ngayKetThuc) {
 
         Pageable pageable = PageRequest.of(page - 1, 10);
+        model.addAttribute("list", this.serviceHD.filterByTrangThai(pageable, trangThai));
+        // model.addAttribute("read", "hoaDon/search?name="+name+"&");
+        model.addAttribute("read", "sanPham/filter?trangThai=" + trangThai + "&");
 
         // model.addAttribute("read", "hoaDon/search?name="+name+"&");
         if (ngayBatDau.length() <= 0 && ngayKetThuc.length() <= 0) {

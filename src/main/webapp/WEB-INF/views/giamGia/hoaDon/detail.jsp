@@ -1,14 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib
-        prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> //thư viện jstl core với tiền tố c
 <%@ taglib prefix="f"
-           uri="http://java.sun.com/jsp/jstl/functions" %>
+           uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chương trình giảm giá hóa đơn</title>
+    
     <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -17,7 +18,7 @@
     />
     <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  //font
     />
     <style>
 
@@ -95,7 +96,7 @@
                     <label class="label name" style="color: black;font-weight: bold;font-size: 17px">Thời gian áp dụng:</label>
                 </div>
                 <div class="col-10">
-                    <b style="color: black;font-weight: bold;font-size: 17px">Từ</b> ${ctggHD.ngayBatDau} <b style="color: black;font-weight: bold;font-size: 17px">đến </b> ${ctggHD.ngayKetThuc}
+                    <b style="color: black;font-weight: bold;font-size: 17px">Từ</b> ${ctggHD.ngayBatDau} <b style="color: black;font-weight: bold;font-size: 17px">Đến </b> ${ctggHD.ngayKetThuc}
                 </div>
             </div>
             <div class="row row-info">

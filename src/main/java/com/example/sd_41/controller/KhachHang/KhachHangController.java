@@ -866,8 +866,8 @@ public class KhachHangController {
             SimpleMailMessage message = new SimpleMailMessage();
 
             message.setTo(email);
-            message.setSubject("Mật khẩu mới của bạn là ");
-            message.setText("Mật khẩu mới của bạn là :" + randomNumber);
+            message.setSubject("Yêu cầu thay đổi mật khẩu");
+            message.setText("Mật khẩu mới của bạn là: " + randomNumber);
 
             mailSender.send(message);
             System.out.println("Thay đổi mật khẩu khách hàng thành công !");

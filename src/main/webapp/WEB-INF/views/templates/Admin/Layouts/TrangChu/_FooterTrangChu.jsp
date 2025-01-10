@@ -6,7 +6,7 @@
 <footer  class="sticky-footer bg-white" style="margin-top: 300px">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span style="text-align: center;width: 2000px; font-weight: bold; font-size: 15px;color: black">Địa chỉ: Cao đẳng thực hành FPT @ đường Trịnh Văn Bô!</span>
+            <span style="text-align: center;width: 2000px; font-weight: bold; font-size: 15px;color: black"></span>
         </div>
     </div>
 </footer>

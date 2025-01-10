@@ -91,7 +91,7 @@
             </div>
             <div class="col-2" style="margin-top: 20px">
                 <p>Tỉ lệ phản hồi: 95%</p>
-                <p>Tham gia: 10/2023</p>
+                <p>Tham gia: 10/2024</p>
             </div>
             <div class="col-2" style="margin-top: 20px">
                 <p>Người theo dõi: </p>

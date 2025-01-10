@@ -60,7 +60,7 @@
 <footer style="height: 10px" class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span style="text-align: center;width: 2000px;">Copyright &copy; Your Website 2023</span>
+            <span style="text-align: center;width: 2000px;"></span>
         </div>
     </div>
 </footer>

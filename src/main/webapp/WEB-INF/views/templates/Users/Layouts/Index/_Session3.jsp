@@ -116,7 +116,7 @@
                         <h3 style="color: black" style="margin-bottom: 100px;margin-top: 100px;text-align: center">SALE</h3>
                     </div>
                     <c:forEach var="listSale"  items="${listSale}">
-                        <c:if test="${listSale.trangThai == 0 && listSale.chuongTrinhGiamGiaGiayTheThao.trangThai ==1}">
+                        <c:if test="${listSale.trangThai == 1 && listSale.chuongTrinhGiamGiaGiayTheThao.trangThai ==1}">
                             <a href="${pageContext.request.contextPath}/GiayTheThao/detailThongTinGiayTheThao/${listSale.giayTheThao.id}">                                    <div class="col-lg-3 col-md-6">
                                         <div class="single-product">
                                             <img class="img-fluid" style="height: 200px" src="/upload/${listSale.giayTheThao.image.get(0).link}" alt="">

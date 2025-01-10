@@ -10,12 +10,12 @@
 <body>
 <%@ include file="../templates/Admin/Layouts/GiayTheThao/_HeaderGiayTheThao.jsp" %>
 <div class="container">
-    <h1>Nhân viên</h1>
+      <h3 style="text-align: center; color: red">Nhân Viên </h3>
     <form action="/user/loc" method="get">
         <div>
             <div>
 				<h6 style="color:black;margin-top: 10px">Trạng thái</h6>
-				            <select id="trangThai" name="trangThai" style="width: 500px;height: 35px; border-radius: 5px 5px 5px"  onchange="this.form.submit()">
+				            <select id="trangThai" name="trangThai" style="width: 400px;height: 35px; border-radius: 5px 5px 5px"  onchange="this.form.submit()">
 				                <option value="">Tất cả trạng thái</option>
 				                <option value="0">Đang hoạt động</option>  <!-- Trạng thái 0 là hoạt động -->
 				                <option value="1">Đã nghỉ làm</option>
@@ -30,22 +30,22 @@
         <button type="submit" class="btn btn-info btn-sm" >Tìm kiếm</button>
     </form>
     <br>
-    <a href="/user/view-add" class="btn btn-info btn-sm"> Add </a>
+    <a href="/user/view-add" class="btn btn-info btn-sm"> Thêm </a>
     <br>
-    <br>
+    <p>
     <div>
         <table class="table">
             <thead>
             <tr>
                 <th>STT</th>
                 <th>Email</th>
-                <th>Tên user</th>
+                <th>Tên</th>
                 <th>Giới tính</th>
 				<th>CCCD</th>
-                <th>SDT</th>
+                <th>SĐT</th>
                 <th>Trạng thái</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>Quyền</th>
+                <th>Xem</th>
             </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
                     <td>${d.role}</td>
                     <td>
                             <%--                    <a href="/user/delete/${d.id}" class="btn btn-danger btn-sm">Remove</a>--%>
-                        <a href="/user/detail/${d.id}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="/user/detail/${d.id}" class="btn btn-info btn-sm">Chi tiết</a>
                             <%--                    <a href="/user/view-add" class="btn btn-info btn-sm"> Add </a>--%>
                     </td>
                 </tr>

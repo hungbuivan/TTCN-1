@@ -19,10 +19,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("api")
+@RestController //đây là một controller chuyên phục vụ các API.
+@RequestMapping("api") //Tất cả các đường dẫn trong controller sẽ bắt đầu với /api
 public class BanHangTaiQuayAPIController {
-    @Autowired
+    @Autowired // tự động tiêm Dependency Injection vào controller
     private HoaDonChiTietServie hoaDonChiTietservie;
 
     @Autowired
@@ -70,9 +70,9 @@ public class BanHangTaiQuayAPIController {
     }
 
     @PostMapping("/gttct/{idGtt}")
-    public GiayTheThaoChiTiet getGttctByGttAndMauSacAndSize(@PathVariable("idGtt") UUID idGtt,
+    public GiayTheThaoChiTiet getGttctByGttAndMauSacAndSize(@PathVariable("idGtt") UUID idGtt, //lấy id gtt từ url để xđ gtt
                                                             @RequestBody String[] mauSacAndSize) {
-        UUID idMs = UUID.fromString(mauSacAndSize[0]);
+        UUID idMs = UUID.fromString(mauSacAndSize[0]); // chuyển đổi chuỗi màu sắc và size thành uuid
         UUID idSize = UUID.fromString(mauSacAndSize[1]);
 
         GiayTheThaoChiTiet gttct = gttctService.getByGttMsSize(idGtt, idMs, idSize);

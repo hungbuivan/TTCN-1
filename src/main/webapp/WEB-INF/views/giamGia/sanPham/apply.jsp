@@ -166,7 +166,7 @@ uri="http://java.sun.com/jsp/jstl/functions"%>
                   <c:otherwise>N/A</c:otherwise>
                 </c:choose>
               </td>
-              <td>${gtt.trangThai==0 ? 'Đã kích hoạt': 'Chưa kích hoạt'}</td>
+              <td>${gtt.trangThai==1 ? 'Đã kích hoạt': 'Chưa kích hoạt'}</td>
 
             </tr>
           </c:forEach>

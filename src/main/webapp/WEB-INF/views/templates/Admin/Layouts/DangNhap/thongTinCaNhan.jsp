@@ -65,7 +65,7 @@
 
 <%@ include file="../../Layouts/GiayTheThao/_HeaderGiayTheThao.jsp" %>
 
-<div class="container">
+<div class="container" >
     <form action="${pageContext.request.contextPath}/TrangChu/Admin/ThongTinCaNhan/Luu" method="post" enctype="multipart/form-data">
         <div class="row" style="margin-top: 70px">
             <div class="col-3">
@@ -155,28 +155,6 @@
 <%@ include file="../../Layouts/GiayTheThao/_FooterGiayTheThao.jsp" %>
 
 
-<%--Định dạng tiền--%>
-
-<script>
-
-    function formatGiaBan() {
-        var giaBanInput = document.getElementById("giaBan");
-        var giaBanValue = giaBanInput.value;
-
-        // Loại bỏ dấu phẩy và khoảng trắng (nếu có)
-        var giaBanFormatted = giaBanValue.replace(/,/g, '').replace(/\s/g, '');
-
-        // Kiểm tra xem giá trị là một số
-        if (!isNaN(giaBanFormatted)) {
-            // Định dạng giá trị thành chuỗi có dấu phẩy
-            var formattedValue = giaBanFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            // Cập nhật giá trị trên trường nhập
-            giaBanInput.value = formattedValue;
-        }
-    }
-
-</script>
 
 <%--mã js cho chọn ảnh--%>
 

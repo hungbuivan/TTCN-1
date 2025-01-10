@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Thống kê dữ liệu</title>
+    <title>Thống kê báo cáo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
             rel="stylesheet"
@@ -18,7 +18,7 @@
 
 <div class="container" style="margin-bottom: 50px">
     <div class="title">
-        <div class="container mt-5">
+        <div class="container">
             <div class="row">
 				<!--chọn khoảng thời gian-->
 				<form action="/thongKeTheoKhoangThoiGian" method="get" class="mb-4">
@@ -97,86 +97,25 @@
                 </div>
 
 
-<!--
-				<div class="col-xl-3 col-md-6 mb-4">
-				    <div class="card border-left-success shadow h-100 py-2">
-				        <div class="card-body">
-				            <div class="row no-gutters align-items-center">
-				                <div class="col mr-2">
-				                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-				                        Sản phẩm bán chạy nhất
-				                    </div>
-				                    <div class="h5 mb-0 font-weight-bold text-gray-800">${maSanPhamBanChayNhat}</div>
-				                </div>
-				                <div class="col-auto">
-				                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-				                </div>
-				            </div>
-				        </div>
-				    </div>
-				</div>
--->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Đã bán/ Tổng sản
-                                        phẩm cả kho
-                                    </div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
-                                                 style="margin-top: 15px">${tongDonHang} / ${totalQuantity}</div>
-                                        </div>
-                                        <%--                                                    <div class="col">--%>
-                                        <%--                                                        <div class="progress progress-sm mr-2">--%>
-                                        <%--                                                            <div class="progress-bar bg-info" role="progressbar" style="width: 20%"--%>
-                                        <%--                                                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>--%>
-                                        <%--                                                        </div>--%>
-                                        <%--                                                    </div>--%>
-                                    </div>
-                                </div>
-                                <%--                                            <div class="col-auto">--%>
-                                <%--                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>--%>
-                                <%--                                            </div>--%>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+				
 
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample">
                 Biểu đồ số lượng sản phẩm
             </button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1"
-                    aria-expanded="false" aria-controls="collapseExample1">
-                Biểu đồ doanh thu
-            </button>
+            
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
                     <div>
                         <button id="barChartButton" class="btn btn-success">Biểu đồ Bar</button>
-                        <button id="lineChartButton" class="btn btn-danger">Biểu đồ Line</button>
-                        <button id="pieChartButton" class="btn btn-warning">Biểu đồ Pie</button>
+                       
                     </div>
                     <canvas id="productChart" width="400" height="200"></canvas>
                 </div>
             </div>
-            <div class="collapse" id="collapseExample1">
-                <div class="card card-body">
-                    <div>
-                        <div class="container mt-5">
-                            <button id="barChartButton1" class="btn btn-success">Biểu đồ Bar</button>
-                            <button id="lineChartButton1" class="btn btn-danger">Biểu đồ Line</button>
-                            <button id="pieChartButton1" class="btn btn-warning">Biểu đồ Pie</button>
-                            <canvas id="productChart1" width="400" height="200"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

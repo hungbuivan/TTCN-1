@@ -192,10 +192,10 @@
                                     pattern="yyyy-MM-dd HH:mm:ss"/>
                     ${formattedDate}
                 <td style="font-size: 14px;color: black;font-weight: bold">
-                    <fmt:formatNumber type="" value="${tongTienView}" pattern="#,##0.###" /> VNĐ
+                    <fmt:formatNumber type="" value="${tongTienView + 30000}" pattern="#,##0.###" /> VNĐ
                 </td>
                 <td style="font-size: 14px;color: black;font-weight: bold">
-                    <fmt:formatNumber type="" value="${phiShipView}" pattern="#,##0.###" /> VNĐ
+                    <fmt:formatNumber type="" value="30000" pattern="#,##0.###" /> VNĐ
                 </td>
                 <td style="font-size: 14px;color: black;font-weight: bold">${thongTienNhanHangView}</td>
                 <td style="font-size: 14px;color: black;font-weight: bold">${messView}</td>

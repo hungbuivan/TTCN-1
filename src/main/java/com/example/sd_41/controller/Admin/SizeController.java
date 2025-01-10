@@ -1,5 +1,6 @@
 package com.example.sd_41.controller.Admin;
 
+import com.example.sd_41.model.Form;
 import com.example.sd_41.model.Size;
 import com.example.sd_41.repository.SanPham.AllGiayTheThao.SizeRepository;
 import com.example.sd_41.service.admin.SizeService;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -47,8 +50,25 @@ public class SizeController {
 //            List<Size> searchResults = sizeService.searchBySize(size);
 //            model.addAttribute("list", searchResults);
 //            return "/Size/index";
-//        }
+//        
 
+    @GetMapping("/filter")
+    public String filter(@RequestParam("trangThai") int trangThai, Model model) {
+        List<Size> list;
+
+        if (trangThai == 2) {
+            // Nếu trạng thái là 2, lấy tất cả các kích thước
+            list = sizeService.getAll();
+        } else {
+            // Nếu có trạng thái cụ thể, lọc theo trạng thái
+            list = sizeService.getByTrangThai(trangThai);
+        }
+
+        model.addAttribute("list", list);
+        return "/Size/index";
+    }
+
+    
     @GetMapping("/view-add")
     public String viewadd(Model model) {
 

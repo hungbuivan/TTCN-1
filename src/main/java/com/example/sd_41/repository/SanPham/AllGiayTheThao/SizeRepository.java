@@ -1,5 +1,6 @@
 package com.example.sd_41.repository.SanPham.AllGiayTheThao;
 
+import com.example.sd_41.model.Form;
 import com.example.sd_41.model.GiayTheThao;
 import com.example.sd_41.model.Size;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ import java.util.UUID;
 public interface SizeRepository extends JpaRepository<Size, UUID> {
     @Query("SELECT s FROM Size s where s in (select gttct.size from GiayTheThaoChiTiet gttct where gttct.giayTheThao =:gtt)")
     public List<Size> getSizeByGtt(GiayTheThao gtt);
+    List<Size> findByTrangThai(int trangThai);
 }
+

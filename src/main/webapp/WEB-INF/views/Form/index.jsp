@@ -11,8 +11,8 @@
 <%@ include file="../templates/Admin/Layouts/GiayTheThao/_HeaderGiayTheThao.jsp" %>
 <div class="container">
 	<form action="/form/filter" method="get">
-	    <h6 style="color:black;margin-top: 10px">Trạng thái</h6>
-	    <select id="trangThai" name="trangThai" style="width: 500px;height: 35px; border-radius: 5px 5px 5px" onchange="this.form.submit()">
+	    <h5 style="color:black;margin-top: 10px">Trạng thái</h5>
+	    <select id="trangThai" name="trangThai" style="width: 400px;height: 35px; border-radius: 5px 5px 5px" onchange="this.form.submit()">
 	        <option value="2" ${param.trangThai == '2' ? 'selected' : ''}>Tất cả trạng thái</option>
 	        <option value="1" ${param.trangThai == '1' ? 'selected' : ''}>Đã kích hoạt</option>
 	        <option value="0" ${param.trangThai == '0' ? 'selected' : ''}>Chưa kích hoạt</option>
@@ -23,18 +23,19 @@
     <br>
     <br>
     <form action="/form/search" method="get">
-        <input type="text" style="width: 400px" name="tenForm">
+        <input type="text" style="width: 350px;height: 30px; border-radius: 5px 5px 5px; margin-left: 110px" name="tenForm">
         <button type="submit" class="btn btn-info btn-sm" >Tìm kiếm</button>
     </form>
     <br>
-    <a href="/form/view-add" class="btn btn-info btn-sm"> Tạo mới </a>
+    <a href="/form/view-add" class="btn btn-info btn-sm" style="margin-left: 60px;"> Tạo mới </a>
     <br>
-    <br>
+    <p>
+    
     <div>
-        <table class="table">
+        <table class="table"style="width: 90%; font-size: 14px; border-collapse: collapse;margin-left: 60px;text-align: center" >
             <thead>
             <tr>
-                <th>#</th>
+                <th>STT</th>
                 <th>Tên form</th>
                 <th>Ngày tạo</th>
                 <th>Ngày sửa</th>
@@ -51,7 +52,7 @@
                     <td>${d.ngayTao}</td>
                     <td>${d.ngaySua}</td>
                     <td>${d.ghiChu}</td>
-                    <td style="padding-left: 55px">${d.trangThai == 1  ?"✔" : "✖"}</td>
+                    <td style="padding-left: 50px">${d.trangThai == 1  ?"✔" : "✖"}</td>
 
                     <td>
                             <%--                    <a href="/user/delete/${d.id}" class="btn btn-danger btn-sm">Remove</a>--%>

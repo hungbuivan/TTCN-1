@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Update dữ liệu giầy thể thao</title>
+    <title>Cập nhật dữ liệu giày thể thao</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="/css/GiayTheThao/All_GiayTheThao/update.css" rel="stylesheet">
 
@@ -56,7 +56,7 @@
         </div>
 
 
-        <h3 style="text-align: center; color: black; margin-bottom: 50px; margin-top: 5px">Update dữ liệu giầy thể thao</h3>
+        <h3 style="text-align: center; color: black; margin-bottom: 50px; margin-top: 5px">Cập nhật dữ liệu giày thể thao</h3>
         <h4 style="color: red; font-weight: bold;font-size: 20px; margin-bottom: 30px">${messDoneUpdate}</h4>
         <form action="/GiayTheThao/update/${giayTheThao.id}" method="POST">
 
@@ -91,12 +91,12 @@
                     <input type="text" class="form-control" id="huongDanBaoQuan" name="huongDanBaoQuan" value="${giayTheThao.huongDanBaoQuan}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label >Lót giầy</label>
+                    <label >Lót giày</label>
                     <span style="color: red">*</span>
 					<input type="text" class="form-control" id="lotGiay" name="lotGiay" value="${giayTheThao.lotGiay}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Cổ giầy</label>
+                    <label>Cổ giày</label>
                     <span style="color: red">*</span>
 					<input type="text" class="form-control" id="coGiay" name="coGiay" value="${giayTheThao.coGiay}">
                 </div>
@@ -104,7 +104,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label >Đế giầy</label>
+                    <label >Đế giày</label>
                     <span style="color: red">*</span>
 					<input type="text" class="form-control" id="deGiay" name="deGiay" value="${giayTheThao.deGiay}">
                 </div>
@@ -133,7 +133,7 @@
 					<input type="text" class="form-control" id="kieuBuoc" name="kieuBuoc" value="${giayTheThao.kieuBuoc}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Đinh tán giầy</label>
+                    <label>Đinh tán giày</label>
                     <span style="color: red">*</span>
 					<input type="text" class="form-control" id="dinhTanGiay" name="dinhTanGiay" value="${giayTheThao.dinhTanGiay}">
                 </div>
@@ -141,7 +141,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label>Tên giầy thể thao</label>
+                    <label>Tên giày thể thao</label>
                     <span style="color: red">*</span>
                     <input type="text" class="form-control"  placeholder="Tên giầy thể thao" name="tenGiayTheThao" value="${giayTheThao.tenGiayTheThao}">
                     <div class="er">
@@ -179,13 +179,13 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         </form>
     </div>
 
     <%-- Create vào chi tiết sản phẩm--%>
     <div class="container">
-        <h3 style="text-align: center;color: black; margin-top: 40px; margin-bottom: 30px">Create giầy thể thao chi tiết (Màu sắc , Kích cỡ, Số lượng)</h3>
+        <h3 style="text-align: center;color: black; margin-top: 40px; margin-bottom: 30px">Create giày thể thao chi tiết (Màu sắc , Kích cỡ, Số lượng)</h3>
         <div class="mess">
             <label style="color: red">${erCheckGiayTheThaoCongDon}</label>
             <label style="color: red">${messageDoneGiayTheThaoChiTiet}</label>
@@ -236,7 +236,7 @@
         <div class="scrollable-list" style="width: 100%; max-height: 300px; overflow-y: auto; overflow-x: hidden">
             <table  class="data-table" style="width: 100%; margin: 20px;">
                 <th scope="col" style="text-align: center; color: black; font-size: 20px">STT</th>
-                <th scope="col" style="text-align: center; color: black; font-size: 20px">Giầy thể thao</th>
+                <th scope="col" style="text-align: center; color: black; font-size: 20px">Giày thể thao</th>
                 <th scope="col" style="text-align: center; color: black; font-size: 20px">Size</th>
                 <th scope="col" style="text-align: center;color: black; font-size: 20px">Màu Sắc</th>
                 <th scope="col" style="text-align: center;color: black; font-size: 20px">Số Lượng</th>
@@ -277,7 +277,7 @@
 							</form>
 							
                             <a href="/GiayTheThao/update/${giayTheThao.id}?giayTheThaoChiTietId=${giayTheThaoChiTiet.id}">
-                                <button class="btn btn-primary">Detail</button>
+                                <button class="btn btn-primary">Chi tiết</button>
                             </a>
                         </th>
                     </tr>

@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-6">
             <label>
-                Tên User
+                Tên
                 <span style="color: red">*</span>
             </label>
             <form:input path="tenUser" class="form-control"/>
@@ -160,7 +160,7 @@
 
 
 
-    <button class="btn btn-success" style="margin-top: 30px; margin-bottom: 30px">Update</button>
+    <button class="btn btn-success" style="margin-top: 30px; margin-bottom: 30px">Cập nhật</button>
 
 </form:form>
 

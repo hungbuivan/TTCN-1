@@ -51,10 +51,10 @@ public class BanHangTaiQuayController {
 
     }
 
-    @GetMapping("thanhToan/{id}")
-    public String getViewPay(Model model, @PathVariable("id") UUID id,HttpSession session) {
+    @GetMapping("thanhToan/{id}") 	//{id}: Là một giá trị động trong URL, đại diện cho ID của hóa đơn
+    public String getViewPay(Model model, @PathVariable("id") UUID id,HttpSession session) { //Ánh xạ yêu cầu HTTP GET với URL dạng thanhToan/{id} tới phương thức getViewPay.
 
-        UUID idUser = (UUID) session.getAttribute("idUser");
+        UUID idUser = (UUID) session.getAttribute("idUser"); // lấy iduser xem là admin hay khách hàng
 
         // Kiểm tra idUser có tồn tại
         if (idUser != null) {

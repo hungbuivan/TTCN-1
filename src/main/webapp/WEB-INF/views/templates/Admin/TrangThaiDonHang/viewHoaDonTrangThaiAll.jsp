@@ -92,7 +92,7 @@
                             ${formattedDate}
                         </td>
                         <td style="font-size: 14px;color: black;font-weight: bold">
-                            <fmt:formatNumber type="" value="${list.thanhTien}" pattern="#,##0.###" /> VNĐ
+                            <fmt:formatNumber type="" value="${list.thanhTien + 30000}" pattern="#,##0.###" /> VNĐ
                         </td>
                         <td style="font-size: 14px;color: black;font-weight: bold">${list.ghiChu}</td>
 <%--                        <td style="font-size: 14px; color: black; font-weight: bold">--%>

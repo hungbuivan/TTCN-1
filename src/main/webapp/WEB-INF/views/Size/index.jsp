@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Title</title>
+    <title>Size</title>
 </head>
 <body>
 <%@ include file="../templates/Admin/Layouts/GiayTheThao/_HeaderGiayTheThao.jsp" %>
@@ -13,11 +13,21 @@
     <h1>Size</h1>
     <div>
         <h6 style="color:black;margin-top: 10px">Trạng thái</h6>
-        <select id="trangThai" style="width: 500px;height: 35px; border-radius: 5px 5px 5px">
-            <option value="" style="">Tất cả trạng thái </option>
-            <option value="1" style="">Đã kích hoạt </option>
-            <option value="0" style="">Chưa kích hoạt </option>
-        </select>
+  <select id="trangThai" style="width: 500px;height: 35px; border-radius: 5px 5px 5px;">
+    <option value="2" style="">Tất cả trạng thái</option>
+    <option value="0" style="">Đã kích hoạt</option>
+    <option value="1" style="">Chưa kích hoạt</option>
+</select>
+
+<script>
+    document.getElementById("trangThai").addEventListener("change", function () {
+        var trangThai = this.value;
+
+        // Gửi yêu cầu đến controller để lọc theo trạng thái
+        var url = "/Size/filter?trangThai=" + trangThai;
+        window.location.href = url;  // Điều hướng tới URL mới với tham số trangThai
+    });
+</script>
 
         <br>
         </form>
@@ -29,11 +39,11 @@
 <%--        <button type="submit" class="btn btn-info btn-sm" >Tìm kiếm</button>--%>
 <%--    </form>--%>
     <br>
-    <a href="/Size/view-add" class="btn btn-info btn-sm"> Add </a>
+    <a href="/Size/view-add" class="btn btn-info btn-sm"> Thêm </a>
     <br>
     <br>
     <div>
-        <table class="table">
+        <table class="table" style="text-align:center">
             <thead>
             <tr>
                 <th>#</th>
@@ -42,7 +52,7 @@
                 <th>Ngày sửa</th>
                 <th>Ghi Chú</th>
                 <th>Trạng thái</th>
-                <th>Action</th>
+                <th>Xem</th>
             </tr>
             </thead>
             <tbody>
@@ -58,7 +68,7 @@
 
                     <td>
                             <%--                    <a href="/user/delete/${d.id}" class="btn btn-danger btn-sm">Remove</a>--%>
-                        <a href="/Size/detail/${d.id}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="/Size/detail/${d.id}" class="btn btn-info btn-sm">Chi tiết</a>
                             <%--                    <a href="/user/view-add" class="btn btn-info btn-sm"> Add </a>--%>
                     </td>
                 </tr>

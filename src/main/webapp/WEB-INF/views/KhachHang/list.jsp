@@ -34,28 +34,17 @@
 <body>
 <%@ include file="../templates/Admin/Layouts/GiayTheThao/_HeaderGiayTheThao.jsp" %>
 <div class="container">
-    <h3 style="text-align: center;">Khách Hàng </h3>
+    <h3 style="text-align: center; color: red">Khách Hàng </h3>
     <br>
     <br>
-<%--    <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm:" aria-label="Search"--%>
-<%--           aria-describedby="basic-addon2">--%>
 
-<%--    <form action="${pageContext.request.contextPath}/KhachHang/search" method="GET">--%>
-<%--        <input style="width: 400px" type="text" name="tenKhachHang">--%>
-<%--        <button class="btn btn-primary" type="submit">Tìm kiếm</button>--%>
-<%--        <h6 style="color: red; margin-top: 10px">${messageFindDone}</h6>--%>
-<%--        <h6 style="color: red; margin-top: 10px">${messageFindError}</h6>--%>
-<%--        <h6 style="color: red; margin-top: 10px">${messageFind}</h6>--%>
-<%--    </form>--%>
-    <br>
-    <br>
     <div class="row">
         <h3 style="margin-top: 5px; color: black; margin-bottom: 20px">Lọc</h3>
         <div class="common-filter">
             <form id="filter-form">
                 <div class="row">
                     <div class="col-6">
-                        <h6 style="color:black">Tên khách hàng</h6>
+                        <h6 style="color:black">Tên</h6>
                         <input style="width: 500px; height: 35px;border-radius: 5px 5px 5px" type="text"
                                id="tenKhachHang" placeholder="Tên khách hàng">
                     </div>
@@ -87,24 +76,23 @@
 
     <br>
     <br>
-
+	<br>
+	
     <div><a href="${pageContext.request.contextPath}/KhachHang/view-createDanngKy" class="btn btn-primary">Thêm khách hàng</a>
     </div>
     <br>
-    <br>
-    <br>
-    <br>
+  <p>
 
     <table class="table table-striped">
-        <thead>
+        <thead style="text-align: center">
         <tr>
             <th scope="col">STT</th>
-            <th scope="col">Tên khách hàng</th>
+            <th scope="col">Tên</th>
             <th scope="col">Email</th>
             <th scope="col">Mật khẩu</th>
             <th scope="col">Giới tính</th>
             <th scope="col">Ngày sinh</th>
-            <th scope="col">Số điện thoại</th>
+            <th scope="col">SĐT</th>
             <th scope="col">Địa chỉ</th>
             <th scope="col">Ghi chú</th>
             <th scope="col">Trạng thái</th>
@@ -112,7 +100,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="kh" items="${listPage}" varStatus="i">
+        <c:forEach var="kh" items="${listPage}" varStatus="i" >
             <tr class="product-item hide-row" data-tenKhachHang="${kh.tenKhachHang}" data-email="${kh.email}"
                 data-soDienThoai="${kh.soDienThoai}" data-diaChi="${kh.diaChi}">
                 <th style="">${i.index+1}</th>
@@ -123,13 +111,13 @@
                 <td style="">${kh.ngaySinh}</td>
                 <td style="">${kh.soDienThoai}</td>
                 <td style="">${kh.diaChi}</td>
-                <td style="">${kh.ghiChu} <span>${kh.status}</span></td>
+                <td style="">${kh.ghiChu} 
                 <td style="padding-top: 30px">${kh.trangThai==0 ?"✔" : "✖"}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/KhachHang/edit/${kh.id}">
-                        <button class="btn btn-primary">Edit</button>
+                        <button class="btn btn-primary">Sửa</button>
                     </a>
-					<button class="btn btn-danger" onclick="deleteKhachHang('${kh.id}')">Delete</button>
+					<button class="btn btn-danger" onclick="deleteKhachHang('${kh.id}')">Xoá</button>
                 </td>
             </tr>
         </c:forEach>

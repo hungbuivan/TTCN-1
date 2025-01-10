@@ -84,11 +84,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
                     <div class="section-title">
-                        <h1 style="">Giầy thể thao</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et
-                            dolore
-                            magna aliqua.</p>
+                        <h1 style="">Giày thể thao</h1>
+                        
                     </div>
                 </div>
             </div>
@@ -97,7 +94,7 @@
             <div class="row">
                 <div class="col-3" style="">
                     <h3>Bộ lọc tìm dữ liệu</h3>
-                    <h4>Tên giầy thể thao</h4>
+                    <h4>Tên giày thể thao</h4>
                     <input style="width: 260px; height: 35px; border-radius: 5px 5px 5px" type="text"
                            id="tenGiayTheThao" placeholder="Tên giày thể thao" oninput="filterProducts()">
                     <h4 style="color: black;margin-top: 20px;margin-bottom: 20px">Giá bán</h4>

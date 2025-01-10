@@ -274,16 +274,15 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h4 style="margin-left: 15px;color: black" class="font-weight-medium">Phí ship tạm tính :</h4>
-                                    <h6 style="margin-right: 50px;color: red" class="font-weight-medium">
-                                        <p style="font-size: 17px" id="shipcode"></p>
-                                        <input type="hidden" name="ship" id="ship" readonly style="border: none; background: none; text-align: left;padding-left: 50%">
-                                    </h6>
+                                    <h5 style="margin-right: 50px;color: red">
+                                        <fmt:formatNumber type="" value="30000" pattern="#,##0.###"/> VNĐ
+                                    </h5>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="price" style="font-size: 20px;color: black;margin-bottom: 20px;margin-left:10px;margin-top: 5px;margin-left: 10px">Tổng tiền:</label>
-                                <input name="thanhTienTong" type="hidden" id="price" value="${hoaDon.thanhTien}" readonly>
+                                <input name="thanhTienTong" type="hidden" id="price" value="${hoaDon.thanhTien + 30000}" readonly>
 <%--                                <input name="thanhTienTongPrice" type="hidden" id="price1" name="tongTien" readonly>--%>
                                 <input type="hidden" id="price1" name="tongTien" readonly>
                                 <br>
@@ -778,7 +777,8 @@
         }
 
         if (provinceName && districtName && wardName) {
-            calculateShipping();
+            // Không gọi setFixedShippingCost nữa
+            // Chỉ xử lý các công việc liên quan đến hiển thị thông tin
         } else {
             document.getElementById("message").innerText = "";
             // Khóa nút tính phí nếu không đủ điều kiện
